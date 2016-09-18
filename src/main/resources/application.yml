@@ -39,3 +39,9 @@ spring:
     mybatis: 
         mapperLocations:classpath:mybatis/mapper/*.xml
         mybatis.config：classpath:mybatis/mybatis-config.xml
+    output:
+      ansi:
+        enabled: always
+logging:
+  config: classpath:config/logback.xml
+
