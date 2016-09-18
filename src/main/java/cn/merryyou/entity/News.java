@@ -4,8 +4,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.io.Serializable;
-import java.util.Date;
 
 /**
  * Created on 2016/9/15 0015.
@@ -14,9 +12,7 @@ import java.util.Date;
  * @since 1.0
  */
 @Table(name="t_news")
-public class News implements Serializable{
-    private static final long serialVersionUID = -6021031812038355073L;
-
+public class News extends BaseEntity{
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
@@ -25,8 +21,7 @@ public class News implements Serializable{
     private String author;
     private String content;
     private int status = 1;
-    private Date createTime;
-    private Date updateTime;
+
 
     public int getId() {
         return id;
@@ -76,22 +71,6 @@ public class News implements Serializable{
         this.status = status;
     }
 
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public Date getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
-    }
-
     @Override
     public String toString() {
         return "News{" +
@@ -101,8 +80,6 @@ public class News implements Serializable{
                 ", author='" + author + '\'' +
                 ", content='" + content + '\'' +
                 ", status=" + status +
-                ", createTime=" + createTime +
-                ", updateTime=" + updateTime +
                 '}';
     }
 }
