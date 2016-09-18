@@ -21,4 +21,9 @@ public class HelloController {
         map.put("name",name);
         return "hello";
     }
+
+    @RequestMapping("/zeroException")
+    public int zeroException(){
+        return 100/0;
+    }
 }

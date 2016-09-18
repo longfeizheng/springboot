@@ -83,13 +83,18 @@
 	                  </td>
 	                  <td>${info.author}</td>
 	                  <td>
-	                  	  <#switch info.status>
-	                  		  <#case "1">
-	                  		 		 发布
-     						        <#break>
-     						  <#default>
-     						  	    草稿
-	                  	  </#switch>
+						  <#if info.status == 1>
+                              发布
+						  <#else>
+                              草稿
+						  </#if>
+	                  	  <#--<#switch info.status>-->
+	                  		  <#--<#case "1">-->
+                                  <#--发布-->
+     						        <#--<#break>-->
+     						  <#--<#default>-->
+                              <#--草稿-->
+	                  	  <#--</#switch>-->
 	                  </td>
 	                  <td>
 						 ${info.createTime?date}
