@@ -15,7 +15,7 @@ import java.io.IOException;
  * @author zlf
  * @since 1.0
  */
-@WebFilter(filterName = "myFilter", urlPatterns = "/*")
+@WebFilter(filterName = "myFilter", urlPatterns = "/detail")
 public class MyFilter implements Filter{
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {

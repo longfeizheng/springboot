@@ -6,6 +6,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import tk.mybatis.mapper.common.Mapper;
 import tk.mybatis.mapper.entity.Example;
 
@@ -22,14 +23,22 @@ import java.util.List;
  * @since 1.0
  */
 public abstract class BaseService <T extends BaseEntity>{
+
     @Autowired
     private MyMapper<T> mapper;
+
+    @Autowired
+    private RedisTemplate<String,String> redisTemplate;
 
     private Class<?> clazz;
 
     public Mapper<T> getMapper(){
         return this.mapper;
     };
+
+    public RedisTemplate<String,String> getRedisTemplate(){
+        return this.redisTemplate;
+    }
 
     @SuppressWarnings("unchecked")
     public BaseService() {
