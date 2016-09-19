@@ -33,6 +33,8 @@ dependencies {
         exclude(module: 'commons-logging')
     }
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-tomcat', version:'1.4.0.RELEASE'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version:'1.4.0.RELEASE'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-redis', version:'1.4.0.RELEASE'
     compile group: 'org.mybatis.spring.boot', name: 'mybatis-spring-boot-starter', version:'1.1.1'
     compile 'org.springframework.boot:spring-boot-starter-logging:1.4.0.RELEASE'
     compile 'org.apache.commons:commons-lang3:3.4'
@@ -46,7 +48,9 @@ dependencies {
     compile group: 'org.projectlombok', name: 'lombok', version:'1.16.6'
     compile group: 'tk.mybatis', name: 'mapper', version:'3.3.7'
     testCompile group: 'junit', name: 'junit', version:'4.12'
+    compile 'com.alibaba:fastjson:1.2.17'
 //    热部署
 //    compile 'org.springframework.boot:spring-boot-devtools:1.4.0.RELEASE'
+//    compile 'org.springframework:springloaded:1.2.6.RELEASE'
 }
 

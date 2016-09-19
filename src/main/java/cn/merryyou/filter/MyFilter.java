@@ -15,7 +15,7 @@ import java.io.IOException;
  * @author zlf
  * @since 1.0
  */
-@WebFilter(filterName = "myFilter", urlPatterns = "/")
+@WebFilter(filterName = "myFilter", urlPatterns = "/*")
 public class MyFilter implements Filter{
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -25,6 +25,7 @@ public class MyFilter implements Filter{
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         System.out.println("《《《《《《《《《《《《《《执行过滤操作");
+        response.setCharacterEncoding("UTF-8");
         chain.doFilter(request,response);
     }
 

@@ -1,7 +1,6 @@
 server:
   port: 8088
 #  context-path: springboot
-
 spring:
     freemarker:
         allow-request-override: false
@@ -43,6 +42,24 @@ spring:
     output:
       ansi:
         enabled: always
+    http:
+      multipart:
+        enabled: true
+        max-file-size: 100Mb
+        max-request-size: 100Mb
+        location: D:\upload
+    redis:
+      database: 0
+      host: 127.0.0.1
+      port: 6379
+      pool:
+        max-idle: 8
+        min-idle: 0
+        max-active: 8
+        max-wait: -1
 logging:
   config: classpath:config/logback.xml
+merryyou:
+  name: 淡淡的伤你
+  url: http://www.merryyou.cn
 
