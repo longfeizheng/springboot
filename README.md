@@ -1,8 +1,4 @@
-SpringBoot 
-  * freemarker
-  * mybatis
-  * 通用mapper
-  * pageHelper
+##SpringBoot + freemarker + mybatis + 通用mapper + PageHelper
 
 ## 执行初始化
    sql \springboot\src\main\resources\init-sql
