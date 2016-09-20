@@ -36,9 +36,9 @@ spring:
 #        testOnReturn: false
 #        poolPreparedStatements: true
 #        maxOpenPreparedStatements: 20
-    mybatis: 
-        mapperLocations:classpath:mybatis/mapper/*.xml
-        mybatis.config：classpath:mybatis/mybatis-config.xml
+#    mybatis:
+#        mapperLocations: classpath:mybatis/mapper/*.xml
+#        config: classpath:mybatis/mybatis-config.xml
     output:
       ansi:
         enabled: always

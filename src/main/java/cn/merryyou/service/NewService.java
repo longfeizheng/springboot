@@ -19,15 +19,15 @@ public class NewService extends BaseService<News> {
 
     private static Logger log = LoggerFactory.getLogger(NewService.class);
 
-    @Cacheable(value = "News")
+    @Cacheable(value = "newsCache",key = "#id + 'findOne'")
     public News findOne(Integer id){
         log.debug("NewService.findOne()=========从数据库中进行获取的....id="+id);
         News news = new News();
         news.setId(id);
         return super.queryOne(news);
     }
-
-    @CacheEvict(value="News")
+//    #user.userId SpEL（Spring Expression Language）表达式
+    @CacheEvict(value = "newsCache",key = "#id + 'findOne'",allEntries = true)
     public void deleteFromCache(Integer id){
         log.debug("NewService.findOne()=========从缓存中删除....id="+id);
     }

@@ -1,10 +1,15 @@
 package cn.merryyou;
 
 import cn.merryyou.entity.News;
+import cn.merryyou.entity.SysPermission;
 import cn.merryyou.mapper.NewsMapper;
+import cn.merryyou.mapper.SysPermissionMapper;
 import cn.merryyou.util.SpringUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -37,9 +42,12 @@ import org.springframework.test.context.web.WebAppConfiguration;
 //指定我们SpringBoot工程的Application启动类
 @SpringApplicationConfiguration(Application.class)
 public class TestMapper{
+	private static Logger log = LoggerFactory.getLogger(TestMapper.class);
 
 //	@Autowired
 //	private NewsMapper newsMapper;
+	@Autowired
+	private SysPermissionMapper sysPermissionMapper;
 	
 	@Test
 	public void testSelect() throws Exception{
@@ -48,4 +56,11 @@ public class TestMapper{
 		News news = newsMapper.selectByPrimaryKey(1);
 		System.out.println(news.toString());
 	}
+
+	@Test
+	public void testMapper() throws Exception{
+		SysPermission sysPermission = sysPermissionMapper.selectByPrimaryKey(11l);
+		log.debug(sysPermission.toString());
+	}
+
 }

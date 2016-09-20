@@ -1,10 +1,6 @@
 package cn.merryyou.conf;
 
-import java.util.Properties;
-
-import javax.annotation.PostConstruct;
-import javax.sql.DataSource;
-
+import com.github.pagehelper.PageHelper;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.ibatis.plugin.Interceptor;
@@ -24,10 +20,13 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.util.Assert;
-import org.springframework.util.StringUtils;
 
-import com.github.pagehelper.PageHelper;
+import javax.annotation.PostConstruct;
+import javax.sql.DataSource;
+import java.util.Properties;
 
 /**
  * {@link EnableAutoConfiguration Auto-Configuration} for Mybatis. Contributes a
@@ -74,20 +73,19 @@ public class MybatisAutoConfiguration {
     @Bean(name = "sqlSessionFactory")
     @ConditionalOnMissingBean
     public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception {
-        SqlSessionFactoryBean factory = new SqlSessionFactoryBean();
-        factory.setDataSource(dataSource);
-        if (StringUtils.hasText(this.properties.getConfig())) {
-            factory.setConfigLocation(
-                    this.resourceLoader.getResource(this.properties.getConfig()));
-        } else {
-            if (this.interceptors != null && this.interceptors.length > 0) {
-                factory.setPlugins(this.interceptors);
-            }
-            factory.setTypeAliasesPackage(this.properties.getTypeAliasesPackage());
-            factory.setTypeHandlersPackage(this.properties.getTypeHandlersPackage());
-            factory.setMapperLocations(properties.resolveMapperLocations());
+        SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
+        bean.setDataSource(dataSource);
+        bean.setTypeAliasesPackage("cn.merryyou.entity");
+
+        //添加XML目录
+        ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
+        try {
+            bean.setMapperLocations(resolver.getResources("classpath:mybatis/mapper/*.xml"));
+            return bean.getObject();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
         }
-        return factory.getObject();
     }
 
 //    @Bean
