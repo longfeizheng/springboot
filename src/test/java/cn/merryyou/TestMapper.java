@@ -5,6 +5,8 @@ import cn.merryyou.entity.SysPermission;
 import cn.merryyou.mapper.NewsMapper;
 import cn.merryyou.mapper.SysPermissionMapper;
 import cn.merryyou.util.SpringUtil;
+import org.apache.shiro.crypto.hash.SimpleHash;
+import org.apache.shiro.util.ByteSource;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -61,6 +63,11 @@ public class TestMapper{
 	public void testMapper() throws Exception{
 		SysPermission sysPermission = sysPermissionMapper.selectByPrimaryKey(11l);
 		log.debug(sysPermission.toString());
+	}
+	@Test
+	public void testPassword() throws Exception{
+		String password =  new SimpleHash("md5","111111", ByteSource.Util.bytes("eteokues")).toHex();
+		log.debug(password);
 	}
 
 }
