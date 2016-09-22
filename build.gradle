@@ -62,6 +62,6 @@ dependencies {
 //    脚本服务(JRuby)，
 //    缓存Cache（EHCache），
 //    任务计划Scheduling（uartz）。
-    compile 'org.springframework:spring-context-support:5.0.0.M1'
+    compile 'org.springframework:spring-context-support:4.3.3.RELEASE'
 }
 
