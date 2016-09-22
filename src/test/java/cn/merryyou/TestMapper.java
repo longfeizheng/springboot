@@ -66,7 +66,7 @@ public class TestMapper{
 	@Test
 	public void testPagehelper() throws Exception{
 		NewsMapper newsMapper = (NewsMapper) SpringUtil.getBean("newsMapper");
-		PageHelper.startPage(1,3);
+		PageHelper.startPage(1,2);
 		List<News> newsList = newsMapper.selectAll();
 		PageInfo<News> pageInfo = new PageInfo<News>(newsList);
 		log.info(pageInfo.getList().size()+"");
