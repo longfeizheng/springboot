@@ -2,7 +2,6 @@ package cn.merryyou.controller;
 
 import cn.merryyou.entity.News;
 import cn.merryyou.entity.PageView;
-import cn.merryyou.exception.CustomException;
 import cn.merryyou.service.NewService;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -44,7 +43,7 @@ public class IndexController {
 
         int total = (int) newService.queryAllCount();
         PageView<News> pageView = new PageView<News>(total,pageNumber);
-        pageView.setList((newService.queryListByPageAndWhere(null,pageView.getPageStart(),pageView.getPageSize())).getList());
+        pageView.setList((newService.queryListByPageAndWhere(null,pageView.getPageNumber(),pageView.getPageSize())).getList());
 
         model.addAttribute("page",pageView);
         return "list";
@@ -61,25 +60,33 @@ public class IndexController {
         //根据shiro返回的异常类路径判断，抛出指定异常信息
         Map map = new HashMap<>();
         String msg ="";
+        String page="index";
         if(exceptionClassName!=null){
             if (UnknownAccountException.class.getName().equals(exceptionClassName)) {
 //                throw new CustomException("账号不存在");
                 log.debug("账号不存在！");
                 msg = "账号不存在!";
+                page="login";
             } else if (IncorrectCredentialsException.class.getName().equals(
                     exceptionClassName)) {
 //                throw new CustomException("用户名/密码错误");
                 log.debug("用户名/密码错误！");
                 msg = "用户名/密码错误!";
+                page="login";
             } else if("randomCodeError".equals(exceptionClassName)){
-                throw new CustomException("验证码错误 ");
+               // throw new CustomException("验证码错误 ");
+                log.debug("验证码错误");
+                msg = "验证码错误";
+                page="login";
             }else {
                 throw new Exception();//最终在异常处理器生成未知错误
             }
+        }else{
+            page="login";
         }
         //此方法不处理登陆成功（认证成功），shiro认证成功会自动跳转到上一个请求路径
         //登陆失败还到login页面
         map.put("msg",msg);
-        return "login";
+        return page;
     }
 }

@@ -5,6 +5,8 @@ import cn.merryyou.entity.SysPermission;
 import cn.merryyou.mapper.NewsMapper;
 import cn.merryyou.mapper.SysPermissionMapper;
 import cn.merryyou.util.SpringUtil;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.util.ByteSource;
 import org.junit.Test;
@@ -15,6 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
+
+import java.util.List;
 
 /**
  * //在所有测试方法前执行一次，一般在其中写上整体初始化的代码
@@ -57,6 +61,17 @@ public class TestMapper{
 		NewsMapper newsMapper = (NewsMapper) SpringUtil.getBean("newsMapper");
 		News news = newsMapper.selectByPrimaryKey(1);
 		System.out.println(news.toString());
+	}
+
+	@Test
+	public void testPagehelper() throws Exception{
+		NewsMapper newsMapper = (NewsMapper) SpringUtil.getBean("newsMapper");
+		PageHelper.startPage(1,3);
+		List<News> newsList = newsMapper.selectAll();
+		PageInfo<News> pageInfo = new PageInfo<News>(newsList);
+		log.info(pageInfo.getList().size()+"");
+		log.info(pageInfo.getTotal()+"");
+		log.info(pageInfo.getPages()+"");
 	}
 
 	@Test

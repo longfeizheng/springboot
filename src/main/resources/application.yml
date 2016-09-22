@@ -57,6 +57,8 @@ spring:
         min-idle: 0
         max-active: 8
         max-wait: -1
+    aop:
+      proxy-target-class: true #使用cglib来实现aop
 logging:
   config: classpath:config/logback.xml
 merryyou:

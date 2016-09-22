@@ -107,6 +107,7 @@ public class MyShiroRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
+        log.debug("MyShiroRealm.doGetAuthorizationInfo()");
         //从 principals获取主身份信息
         //将getPrimaryPrincipal方法返回值转为真实身份类型（在上边的doGetAuthenticationInfo认证通过填充到SimpleAuthenticationInfo中身份类型），
         ActiveUser activeUser =  (ActiveUser) principals.getPrimaryPrincipal();
