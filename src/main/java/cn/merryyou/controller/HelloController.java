@@ -1,10 +1,12 @@
 package cn.merryyou.controller;
 
+import cn.merryyou.conf.springbean.Shanhy;
 import cn.merryyou.properties.MerryYouProperties;
 import cn.merryyou.properties.MerryYouSettings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,9 +14,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.Resource;
 import java.io.BufferedOutputStream;
-import java.io.FileOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -35,6 +38,13 @@ public class HelloController {
     @Autowired
     private MerryYouProperties merryYouProperties;
 
+    @Autowired
+    @Qualifier("shanyA")
+    private Shanhy shanhyA;
+
+    @Resource(name="shanyB")
+    private Shanhy shanhyB;
+
     @RequestMapping("/hello/{name}")
     public String hello(@PathVariable("name") String name){
         Map map = new HashMap<>();
@@ -51,6 +61,8 @@ public class HelloController {
     public @ResponseBody String test(){
         logger.debug(merryYouProperties.getName()+"...................."+merryYouProperties.getUrl());
         logger.debug(merryYouSettings.getName()+"...................."+merryYouSettings.getUrl());
+        shanhyA.display();
+        shanhyB.display();
         return "成功";
     }
     @RequestMapping("rest")
