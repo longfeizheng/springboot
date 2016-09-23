@@ -59,12 +59,12 @@ spring:
         max-active: 8
         max-wait: -1
     aop:
-      proxy-target-class: true #使用cglib来实现aop
+      #使用cglib来实现aop
+      proxy-target-class: true
+    profiles:
+      active: test #表示测试环境 @Profile("prod") 注解在接口实现类上
 logging:
   config: classpath:config/logback.xml
-merryyou:
-  name: 淡淡的伤你
-  url: http://www.merryyou.cn
 # 更多数据源
 custom:
   datasource:
