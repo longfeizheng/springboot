@@ -1,13 +1,11 @@
 package cn.merryyou.conf;
 
-import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.support.http.StatViewServlet;
 import com.alibaba.druid.support.http.WebStatFilter;
 import com.alibaba.druid.support.spring.stat.DruidStatInterceptor;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter4;
-import com.github.pagehelper.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.aop.Advisor;
@@ -19,7 +17,6 @@ import org.springframework.boot.bind.RelaxedPropertyResolver;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.MultipartConfigFactory;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
-import org.springframework.context.ApplicationContextException;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -28,8 +25,6 @@ import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.servlet.MultipartConfigElement;
-import javax.sql.DataSource;
-import java.util.Arrays;
 
 /**
  * 凡是被Spring管理的类，实现接口 EnvironmentAware
@@ -59,34 +54,34 @@ public class DatabaseConfiguration implements EnvironmentAware{
                 "spring.datasource.");
 	}
 
-	@Bean(initMethod = "init", destroyMethod = "close")
-    public DataSource dataSource() {
-        log.debug("Configruing DataSource");
-        if (StringUtil.isEmpty(datasourcePropertyResolver.getProperty("url"))) {
-            log.error("Your database conncetion pool configuration is incorrct ! The application "
-                    + "cannot start . Please check your jdbc");
-            Arrays.toString(environment.getActiveProfiles());
-            throw new ApplicationContextException(
-                    "DataBase connection pool is not configured correctly");
-        }
-        DruidDataSource druidDataSource = new DruidDataSource();
-        druidDataSource.setUrl(datasourcePropertyResolver.getProperty("url"));
-        druidDataSource.setUsername(datasourcePropertyResolver.getProperty("username"));
-        druidDataSource.setPassword(datasourcePropertyResolver.getProperty("password"));
-        druidDataSource.setInitialSize(5);
-        druidDataSource.setMinIdle(5);
-        druidDataSource.setMaxActive(20);
-        druidDataSource.setMaxWait(60000);
-        druidDataSource.setTimeBetweenEvictionRunsMillis(60000);
-        druidDataSource.setMinEvictableIdleTimeMillis(300000);
-        druidDataSource.setTestWhileIdle(true);
-        druidDataSource.setTestOnBorrow(false);
-        druidDataSource.setTestOnReturn(false);
-        druidDataSource.setPoolPreparedStatements(true);
-        druidDataSource.setMaxPoolPreparedStatementPerConnectionSize(20);
-        druidDataSource.setEnable(true);
-        return druidDataSource;
-    }
+//	@Bean(initMethod = "init", destroyMethod = "close")
+//    public DataSource dataSource() {
+//        log.debug("Configruing DataSource");
+//        if (StringUtil.isEmpty(datasourcePropertyResolver.getProperty("url"))) {
+//            log.error("Your database conncetion pool configuration is incorrct ! The application "
+//                    + "cannot start . Please check your jdbc");
+//            Arrays.toString(environment.getActiveProfiles());
+//            throw new ApplicationContextException(
+//                    "DataBase connection pool is not configured correctly");
+//        }
+//        DruidDataSource druidDataSource = new DruidDataSource();
+//        druidDataSource.setUrl(datasourcePropertyResolver.getProperty("url"));
+//        druidDataSource.setUsername(datasourcePropertyResolver.getProperty("username"));
+//        druidDataSource.setPassword(datasourcePropertyResolver.getProperty("password"));
+//        druidDataSource.setInitialSize(5);
+//        druidDataSource.setMinIdle(5);
+//        druidDataSource.setMaxActive(20);
+//        druidDataSource.setMaxWait(60000);
+//        druidDataSource.setTimeBetweenEvictionRunsMillis(60000);
+//        druidDataSource.setMinEvictableIdleTimeMillis(300000);
+//        druidDataSource.setTestWhileIdle(true);
+//        druidDataSource.setTestOnBorrow(false);
+//        druidDataSource.setTestOnReturn(false);
+//        druidDataSource.setPoolPreparedStatements(true);
+//        druidDataSource.setMaxPoolPreparedStatementPerConnectionSize(20);
+//        druidDataSource.setEnable(true);
+//        return druidDataSource;
+//    }
 
     @Bean
     public ServletRegistrationBean DruidStatViewServle(){

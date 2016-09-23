@@ -37,6 +37,13 @@ public class ShiroConfiguration {
         //必须设置SecurityManager
         shiroFilterFactoryBean.setSecurityManager(securityManager);
 
+        //loginUrl认证提交地址，如果没有认证将会请求此地址进行认证
+        shiroFilterFactoryBean.setLoginUrl("/login");
+        //认证成功统一跳转到/index，建议不配置，shiro认证成功自动到上一个请求路径
+        shiroFilterFactoryBean.setSuccessUrl("/");
+        //通过unauthorizedUrl指定没有权限操作时跳转页面
+        shiroFilterFactoryBean.setUnauthorizedUrl("/refuse");
+
         //拦截器
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<String, String>();
         //对静态资源设置匿名访问

@@ -1,5 +1,6 @@
 package cn.merryyou.service.impl;
 
+import cn.merryyou.conf.datasource.TargetDataSource;
 import cn.merryyou.entity.SysPermission;
 import cn.merryyou.entity.SysUser;
 import cn.merryyou.entity.SysUserExample;
@@ -27,6 +28,7 @@ public class SysServiceImpl implements SysService {
     private SysPermissionMapperCustom sysPermissionMapperCustom;
 
     @Override
+    @TargetDataSource("ds1")
     public SysUser findSysUserByUserCode(String userCode) throws Exception{
         SysUserExample example = new SysUserExample();
         SysUserExample.Criteria criteria = example.createCriteria().andUsercodeEqualTo(userCode);
