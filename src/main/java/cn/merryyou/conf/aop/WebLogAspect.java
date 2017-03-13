@@ -66,6 +66,7 @@ public class WebLogAspect {
     @AfterReturning("webLog()")
     public void doAfterReturning(JoinPoint joinPoint) {
         // 处理完请求，返回内容
+        logger.info("DATA :" + String.valueOf(((ProceedingJoinPoint) joinPoint).proceed()));
         logger.info("WebLogAspect.doAfterReturning()");
         logger.info("耗时（毫秒） : " + (System.currentTimeMillis() - startTime.get()));
     }
